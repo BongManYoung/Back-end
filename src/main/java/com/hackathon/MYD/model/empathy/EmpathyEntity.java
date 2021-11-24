@@ -1,5 +1,6 @@
 package com.hackathon.MYD.model.empathy;
 
+import com.hackathon.MYD.model.review.ReviewEntity;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,9 +16,14 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class EmpathyEntity {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "empathy_id")
-    private Long empathyIdx;
+    @EmbeddedId
+    private EmpathyId empathyIdx;
+
+    @MapsId("reviewIdx")
+    @ManyToOne
+    @JoinColumn(name = "review_id")
+    public ReviewEntity reviewEntity;
+
 
     @Column(name = "perfect")
     private Integer perfect;
