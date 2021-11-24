@@ -1,8 +1,10 @@
 plugins {
 	id 'org.springframework.boot' version '2.6.0'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	//querydsl 추가
+	// *** querydsl *** //
 	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+	// *** Q-Type error 때문에 추가 *** //
+	id "io.franzbecker.gradle-lombok" version "3.0.0"
 	id 'java'
 }
 
@@ -23,33 +25,40 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// *** querydsl *** //
+	implementation 'com.querydsl:querydsl-jpa'
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	// *** querydsl *** //
-	implementation 'com.querydsl:querydsl-jpa:4.4.0'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 test {
 	useJUnitPlatform()
 }
 
-//querydsl 추가 시작
-def querydslDir = "$buildDir/generated/querydsl"
-
+def querydslSrcDir = 'src/main/generated'
 querydsl {
+	library = "com.querydsl:querydsl-apt"
 	jpa = true
-	querydslSourcesDir = querydslDir
+	querydslSourcesDir = querydslSrcDir
 }
-sourceSets {
-	main.java.srcDir querydslDir
+compileQuerydsl{
+// querydsl 컴파일시 사용하는 애노테이션프로세서('com.querydsl.apt.jpa.JPAAnnotationProcessor')의 경로를 querydsl 이 지정한 경로를 이용한다는 선언
+options.annotationProcessorPath = configurations.querydsl
 }
 configurations {
 	querydsl.extendsFrom compileClasspath
 }
-compileQuerydsl {
-	options.annotationProcessorPath = configurations.querydsl
+sourceSets {
+	main {
+		java { srcDirs = ['src/main/java', querydslSrcDir]
+		}
+	}
 }
-//querydsl 추가 끝
+// 이 부분이 추가.
+tasks.withType(JavaCompile) {
+	options.annotationProcessorGeneratedSourcesDirectory = file(querydslSrcDir)
+}
