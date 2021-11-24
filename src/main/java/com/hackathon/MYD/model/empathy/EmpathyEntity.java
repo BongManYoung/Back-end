@@ -24,7 +24,6 @@ public class EmpathyEntity {
     @JoinColumn(name = "review_id")
     public ReviewEntity reviewEntity;
 
-
     @Column(name = "perfect")
     private Integer perfect;
 
