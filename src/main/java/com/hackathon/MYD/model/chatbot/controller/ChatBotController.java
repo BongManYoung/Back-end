@@ -2,6 +2,7 @@ package com.hackathon.MYD.model.chatbot.controller;
 
 import com.hackathon.MYD.model.chatbot.payload.MenuListResponse;
 import com.hackathon.MYD.model.chatbot.payload.MyReviewsResponse;
+import com.hackathon.MYD.model.chatbot.payload.RandomProductResponse;
 import com.hackathon.MYD.model.chatbot.service.ChatBotService;
 
 import com.hackathon.MYD.util.JwtUtil;
@@ -15,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ChatBotController {
     private final ChatBotService chatBotService;
-
     private final JwtUtil jwtUtil;
+
     @GetMapping("/{storeId}/menu")
     public MenuListResponse menuList(@PathVariable int storeId){
         return chatBotService.getMenuList(storeId);
@@ -25,5 +26,10 @@ public class ChatBotController {
     @GetMapping("/{storeId}/myReview")
     public MyReviewsResponse myReview(@RequestHeader("Authorization") String token, @PathVariable int storeId){
         return chatBotService.myReviewList(jwtUtil.getUserNicknameFromJwtToken(token), storeId);
+    }
+
+    @GetMapping("/{storeId}/random-menu")
+    public RandomProductResponse randomMenu(@PathVariable int storeId){
+        return chatBotService.randomMenu(storeId);
     }
 }
