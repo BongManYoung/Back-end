@@ -4,6 +4,7 @@ import com.hackathon.MYD.exception.StoreNotFoundException;
 import com.hackathon.MYD.model.chatbot.payload.MenuListResponse;
 import com.hackathon.MYD.model.chatbot.payload.MyReviewResponse;
 import com.hackathon.MYD.model.chatbot.payload.MyReviewsResponse;
+import com.hackathon.MYD.model.chatbot.payload.RandomProductResponse;
 import com.hackathon.MYD.model.product.ProductEntity;
 import com.hackathon.MYD.model.product.repository.ProductRepository;
 import com.hackathon.MYD.model.review.ReviewEntity;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @RequiredArgsConstructor
 @Service
@@ -44,5 +46,12 @@ public class ChatBotService {
             names.add(p.getProductName());
         }
         return MenuListResponse.builder().names(names).nextAnswer("더 필요한 게 있으신가요?").build();
+    }
+
+    public RandomProductResponse randomMenu(long storeId){
+        List<ProductEntity> products = productRepository.findByStoreIdx(storeRepository.findById(storeId).orElseThrow(StoreNotFoundException::new));
+        int idx = new Random().nextInt(products.size());
+        ProductEntity product = products.get(idx);
+        return RandomProductResponse.builder().name(product.getProductName()).build();
     }
 }
