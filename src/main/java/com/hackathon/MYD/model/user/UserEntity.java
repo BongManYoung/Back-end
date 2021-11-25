@@ -16,8 +16,7 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    // unique
+    @Column(unique = true)
     private String nickname;
     private String password;
-
 }
