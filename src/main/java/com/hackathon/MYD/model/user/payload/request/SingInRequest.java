@@ -1,9 +1,9 @@
-package com.hackathon.MYD.model.user;
+package com.hackathon.MYD.model.user.payload.request;
 
 import lombok.Getter;
 
 @Getter
-public class SingUpRequest {
+public class SingInRequest {
     private String nickname;
     private String password;
 }
