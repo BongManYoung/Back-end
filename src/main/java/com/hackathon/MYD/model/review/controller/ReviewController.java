@@ -43,5 +43,27 @@ public class ReviewController {
         return reviewService.getStoreReview(storeIdx);
     }
 
+    /**
+     * 해당 리뷰에 공감 추가하기.
+     *
+     * @param reviewIdx
+     * @return String
+     */
+    @PutMapping("/like/{reviewIdx}")
+    public String addLike(@PathVariable Long reviewIdx){
+        reviewService.addLike(reviewIdx);
+        return "좋아요가 정상 반영 되었습니다.";
+    }
 
+    /**
+     *  해당 리뷰에 공감 취소하기.
+     *
+     * @param reviewIdx
+     * @return String
+     */
+    @PutMapping("/like/cancel/{reviewIdx}")
+    public String cancelLike(@PathVariable Long reviewIdx){
+        reviewService.cancelLike(reviewIdx);
+        return "좋아요 취소가 정상 반영 되었습니다.";
+    }
 }
