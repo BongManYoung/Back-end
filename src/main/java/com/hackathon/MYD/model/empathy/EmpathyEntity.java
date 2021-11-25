@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Builder
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class EmpathyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
