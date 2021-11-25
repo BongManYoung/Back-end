@@ -48,10 +48,18 @@ public class ChatBotService {
         return MenuListResponse.builder().names(names).nextAnswer("더 필요한 게 있으신가요?").build();
     }
 
-    public RandomProductResponse randomMenu(long storeId){
+    public RandomProductResponse randomMenu(long storeId, String message){
+        if(checkRecommendation(message)){
+            return RandomProductResponse.builder().name("죄송합니당... 저는 아직 학습이 부족해요").build();
+        }
         List<ProductEntity> products = productRepository.findByStoreIdx(storeRepository.findById(storeId).orElseThrow(StoreNotFoundException::new));
         int idx = new Random().nextInt(products.size());
         ProductEntity product = products.get(idx);
+
         return RandomProductResponse.builder().name(product.getProductName()).build();
+    }
+
+    private boolean checkRecommendation(String message){
+        return !message.contains("추천");
     }
 }
