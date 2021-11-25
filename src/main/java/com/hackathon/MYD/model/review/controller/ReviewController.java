@@ -64,7 +64,7 @@ public class ReviewController {
      * @return String
      */
     @PutMapping("/like/cancel/{reviewIdx}")
-    public String cancelLike(@PathVariable Long reviewIdx){
+    public String cancelLike(@PathVariable Long reviewIdx) throws Exception {
         reviewService.cancelLike(reviewIdx);
         return "좋아요 취소가 정상 반영 되었습니다.";
     }
@@ -88,8 +88,8 @@ public class ReviewController {
      * @return String
      */
     @PutMapping("/cancel/dislike/{reviewIdx}")
-    public String cancelDislike(@PathVariable Long reviewIdx){
-        reviewService.addDislike(reviewIdx);
+    public String cancelDislike(@PathVariable Long reviewIdx) throws Exception {
+        reviewService.cancelDislike(reviewIdx);
         return "싫어요 취소가 정상 반영 되었습니다.";
     }
 }

@@ -85,9 +85,13 @@ public class ReviewService {
      * @param reviewIdx
      */
     @Transactional
-    public void cancelLike(Long reviewIdx){
+    public void cancelLike(Long reviewIdx) throws Exception {
         ReviewEntity targetReview = reviewRepository.findByReviewIdx(reviewIdx);
-        targetReview.setPerfect(targetReview.getPerfect()-1);
+
+        Integer existPerfect = targetReview.getPerfect();
+        if (existPerfect <= 0) throw new Exception("공감을 더이상 취소 할 수 없습니다.");
+
+        targetReview.setPerfect(existPerfect-1);
     }
 
     /**
@@ -107,8 +111,12 @@ public class ReviewService {
      * @param reviewIdx
      */
     @Transactional
-    public void cancelDislike(Long reviewIdx){
+    public void cancelDislike(Long reviewIdx) throws Exception {
         ReviewEntity targetReview = reviewRepository.findByReviewIdx(reviewIdx);
-        targetReview.setNotMuch(targetReview.getNotMuch()-1);
+
+        Integer existNotMuch = targetReview.getNotMuch();
+        if (existNotMuch <= 0) throw new Exception("비공감을 더이상 취소 할 수 없습니다.");
+
+        targetReview.setNotMuch(existNotMuch-1);
     }
 }
