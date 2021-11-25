@@ -27,7 +27,7 @@ public class ChatBotService {
     private final ProductRepository productRepository;
 
     public MyReviewsResponse myReviewList(String nickname, long storeId){
-        List<ReviewEntity> reviewList = reviewRepository.findByUserIdxAndStoreEntity(userRepository.findByNickname(nickname), storeRepository.findById(storeId).orElseThrow(StoreNotFoundException::new));
+        List<ReviewEntity> reviewList = reviewRepository.findByUserEntityAndStoreEntity(userRepository.findByNickname(nickname), storeRepository.findById(storeId).orElseThrow(StoreNotFoundException::new));
         List<MyReviewResponse> myReviews = new ArrayList<>();
         for(ReviewEntity review : reviewList){
             myReviews.add(MyReviewResponse.builder()
