@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum ErrorCode {
+public enum ExceptionMessage {
     INVALID_TOKEN(401,"Invalid Token"),
     INVALID_SIGNATURE(401, "Invalid signature"),
     TOKEN_EXPIRED(401, "Token expired"),

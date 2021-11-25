@@ -4,11 +4,11 @@ import lombok.Getter;
 
 @Getter
 public class BasicException extends RuntimeException{
-    private final ErrorCode errorCode;
+    private final ExceptionMessage exceptionMessage;
 
-    public BasicException(ErrorCode errorCode) {
-        super(errorCode.getMessage());
+    public BasicException(ExceptionMessage exceptionMessage) {
+        super(exceptionMessage.getMessage());
 
-        this.errorCode = errorCode;
+        this.exceptionMessage = exceptionMessage;
     }
 }

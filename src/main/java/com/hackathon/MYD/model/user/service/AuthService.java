@@ -44,7 +44,7 @@ public class AuthService {
     public TokenResponse singIn(SingInRequest req){
         UserEntity user = userRepository.findByNicknameAndPassword(req.getNickname(),pwEncrypt(req.getPassword()));
         if(user == null){
-            throw new BasicException(ErrorCode.USER_NOT_FOUND);
+            throw new BasicException(ExceptionMessage.USER_NOT_FOUND);
         }
         return TokenResponse.builder().token(jwtUtil.createToken(req.getNickname())).build();
     }
