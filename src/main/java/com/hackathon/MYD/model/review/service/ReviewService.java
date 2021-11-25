@@ -67,7 +67,7 @@ public class ReviewService {
     }
 
     /**
-     * 해당 매장에 공감을 추가한다.
+     * 해당 리뷰에 공감을 추가한다.
      *
      * @param reviewIdx
      */
@@ -78,13 +78,35 @@ public class ReviewService {
     }
 
     /**
-     * 해당 매장에 공감을 취소한다.
+     * 해당 리뷰에 공감을 취소한다.
      *
      * @param reviewIdx
      */
     @Transactional
     public void cancelLike(Long reviewIdx){
         ReviewEntity targetReview = reviewRepository.findByReviewIdx(reviewIdx);
-        targetReview.setReviewIdx(targetReview.getReviewIdx()-1);
+        targetReview.setPerfect(targetReview.getPerfect()-1);
+    }
+
+    /**
+     * 해당 리뷰에 비공감을 추가한다.
+     *
+     * @param reviewIdx
+     */
+    @Transactional
+    public void addDislike(Long reviewIdx){
+        ReviewEntity targetReview = reviewRepository.findByReviewIdx(reviewIdx);
+        targetReview.setNotMuch(targetReview.getNotMuch()+1);
+    }
+
+    /**
+     * 해당 리뷰에 비공감을 취소한다.
+     *
+     * @param reviewIdx
+     */
+    @Transactional
+    public void cancelDislike(Long reviewIdx){
+        ReviewEntity targetReview = reviewRepository.findByReviewIdx(reviewIdx);
+        targetReview.setNotMuch(targetReview.getNotMuch()-1);
     }
 }
