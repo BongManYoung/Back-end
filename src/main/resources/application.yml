@@ -30,6 +30,11 @@ spring:
           auto: create
     show-sql: true
 
+### Logging ###
+logging:
+  level:
+    org.hibernate.type.descriptor.sql : trace
+
 auth:
   jwt:
-    secret: ${SECRET:}
+    secret: ${SECRET:JIMIN-Y0UCAND0_hahabab0chareup2021}

@@ -1,5 +1,6 @@
 package com.hackathon.MYD.model.review;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hackathon.MYD.model.store.StoreEntity;
 import com.hackathon.MYD.model.user.UserEntity;
 import lombok.*;
@@ -11,7 +12,7 @@ import javax.persistence.*;
  */
 @Entity(name = "review")
 @Builder
-@Getter
+@Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class ReviewEntity {
@@ -34,7 +35,7 @@ public class ReviewEntity {
      */
     @ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    private UserEntity userIdx;
+    private UserEntity userEntity;
 
     /**
      * StoreEntity 와 연관관계를 맺는다.
