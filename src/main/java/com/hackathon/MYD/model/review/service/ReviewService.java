@@ -3,6 +3,7 @@ package com.hackathon.MYD.model.review.service;
 import com.hackathon.MYD.model.review.ReviewEntity;
 import com.hackathon.MYD.model.review.dto.ReviewDto;
 import com.hackathon.MYD.model.review.repository.ReviewRepository;
+import com.hackathon.MYD.model.review.repository.ReviewSummary;
 import com.hackathon.MYD.model.store.StoreEntity;
 import com.hackathon.MYD.model.store.repository.StoreRepository;
 import com.hackathon.MYD.model.user.UserEntity;
@@ -62,7 +63,7 @@ public class ReviewService {
      * @param storeIdx
      * @return List<ReviewEntity>
      */
-    public List<ReviewEntity> getStoreReview(Long storeIdx){
+    public List<ReviewSummary> getStoreReview(Long storeIdx){
         return reviewRepository.findAllByStoreEntity_StoreIdx(storeIdx);
     }
 
