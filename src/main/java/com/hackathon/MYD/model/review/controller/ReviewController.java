@@ -5,6 +5,7 @@ import com.hackathon.MYD.model.review.dto.ReviewDto;
 import com.hackathon.MYD.model.review.service.ReviewService;
 import com.hackathon.MYD.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequestMapping("/review")
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 public class ReviewController {
 
     private final JwtUtil jwtUtil;
@@ -29,6 +31,7 @@ public class ReviewController {
             @PathVariable Long storeIdx
     ) throws Exception {
         String nickname = jwtUtil.getUserNicknameFromJwtToken(accessToken);
+        log.info("============= current nickname: {}", nickname);
         reviewService.saveReview(storeIdx, nickname, reviewRequestDto);
     }
 
