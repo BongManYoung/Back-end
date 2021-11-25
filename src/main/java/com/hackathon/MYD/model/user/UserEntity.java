@@ -14,6 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class UserEntity {
     @Id
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     // unique
