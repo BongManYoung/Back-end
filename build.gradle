@@ -66,4 +66,3 @@ test {
 //tasks.withType(JavaCompile) {
 //	options.annotationProcessorGeneratedSourcesDirectory = file(querydslSrcDir)
 //}
-
