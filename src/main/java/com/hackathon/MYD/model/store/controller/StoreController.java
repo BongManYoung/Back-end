@@ -34,4 +34,11 @@ public class StoreController {
 
         return new ResponseData<>(HttpStatus.OK, "성공", data);
     }
+
+    @GetMapping("/all")
+    public ResponseData<List<StoreDetailDto>> getAll() {
+        List<StoreDetailDto> data = storeService.getAll();
+
+        return new ResponseData<>(HttpStatus.OK, "성공", data);
+    }
 }
