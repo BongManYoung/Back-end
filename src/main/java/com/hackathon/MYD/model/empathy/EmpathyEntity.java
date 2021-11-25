@@ -1,10 +1,7 @@
 package com.hackathon.MYD.model.empathy;
 
 import com.hackathon.MYD.model.review.ReviewEntity;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,6 +10,7 @@ import javax.persistence.*;
  */
 @Entity(name = "empathy")
 @Builder
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class EmpathyEntity {
@@ -20,8 +18,8 @@ public class EmpathyEntity {
     private EmpathyId empathyIdx;
 
     @MapsId("reviewIdx")
-    @ManyToOne
-    @JoinColumn(name = "review_id")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "review_id", referencedColumnName = "review_id")
     public ReviewEntity reviewEntity;
 
     @Column(name = "perfect")
