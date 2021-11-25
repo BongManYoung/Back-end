@@ -1,6 +1,7 @@
 package com.hackathon.MYD.model.review;
 
 import com.hackathon.MYD.model.empathy.EmpathyEntity;
+import com.hackathon.MYD.model.user.UserEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,9 +27,9 @@ public class ReviewEntity {
     /**
      * UserEntity와 연관관계를 맺는다.
      */
-//    @OneToMany(mappedBy = "user")
-//    @Column(name = "user_id")
-//    private Long userIdx;
+    @ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private UserEntity userIdx;
 
     /**
      * StoreEntity와 연관관계를 맺는다.

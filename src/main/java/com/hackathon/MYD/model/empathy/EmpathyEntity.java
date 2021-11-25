@@ -20,6 +20,7 @@ public class EmpathyEntity {
     private Long empathyIdx;
 
     @OneToOne
+    @JoinColumn(name = "review_id")
     private ReviewEntity reviewEntity;
 
     @Column(name = "perfect")
