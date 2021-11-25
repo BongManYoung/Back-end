@@ -3,7 +3,6 @@ package com.hackathon.MYD.model.review.service;
 import com.hackathon.MYD.model.review.ReviewEntity;
 import com.hackathon.MYD.model.review.dto.ReviewDto;
 import com.hackathon.MYD.model.review.repository.ReviewRepository;
-import com.hackathon.MYD.model.review.repository.ReviewSummary;
 import com.hackathon.MYD.model.store.StoreEntity;
 import com.hackathon.MYD.model.store.repository.StoreRepository;
 import com.hackathon.MYD.model.user.UserEntity;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -63,10 +63,9 @@ public class ReviewService {
      * @param storeIdx
      * @return List<ReviewEntity>
      */
-    public List<ReviewSummary> getStoreReview(Long storeIdx){
-        List<ReviewSummary> reviews = reviewRepository.findAllByStoreEntity_StoreIdx(storeIdx);
-        System.out.println("==============="+ reviews.get(0).getReviewIdx() + " " + reviews.get(0).getReiewContent());
-        return reviews;
+    public List<ReviewDto.ReviewResponseDto> getStoreReview(Long storeIdx){
+        return reviewRepository.findAllByStoreEntity_StoreIdx(storeIdx)
+                .stream().map(ReviewDto.ReviewResponseDto::of).collect(Collectors.toList());
     }
 
     /**

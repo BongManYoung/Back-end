@@ -1,5 +1,6 @@
 package com.hackathon.MYD.model.review;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hackathon.MYD.model.store.StoreEntity;
 import com.hackathon.MYD.model.user.UserEntity;
 import lombok.*;

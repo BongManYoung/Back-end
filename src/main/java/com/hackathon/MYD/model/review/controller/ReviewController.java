@@ -1,7 +1,6 @@
 package com.hackathon.MYD.model.review.controller;
 
 import com.hackathon.MYD.model.review.dto.ReviewDto;
-import com.hackathon.MYD.model.review.repository.ReviewSummary;
 import com.hackathon.MYD.model.review.service.ReviewService;
 import com.hackathon.MYD.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +41,7 @@ public class ReviewController {
      * @return List<ReviewEntity>
      */
     @GetMapping("/{storeIdx}")
-    public List<ReviewSummary> getReview(@PathVariable Long storeIdx){
+    public List<ReviewDto.ReviewResponseDto> getReview(@PathVariable Long storeIdx){
         return reviewService.getStoreReview(storeIdx);
     }
 

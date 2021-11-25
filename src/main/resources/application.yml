@@ -29,6 +29,7 @@ spring:
         hbm2ddl:
           auto: create
     show-sql: true
+
 ### Logging ###
 logging:
   level:
