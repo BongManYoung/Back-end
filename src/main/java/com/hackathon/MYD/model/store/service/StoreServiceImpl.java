@@ -50,4 +50,23 @@ public class StoreServiceImpl implements StoreService {
 
         return new StoreDetailDto(store, productDtoList);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<StoreDetailDto> getAll() {
+        List<StoreDetailDto> response = new ArrayList<>();
+        List<StoreEntity> stores = storeRepository.findAll();
+
+        for (StoreEntity store : stores) {
+            List<ProductDto> productDtoList = new ArrayList<>();
+            for (ProductEntity product : store.getProducts()) {
+                ProductDto productDto = new ProductDto(product);
+                productDtoList.add(productDto);
+            }
+            StoreDetailDto storeDetailDto = new StoreDetailDto(store, productDtoList);
+            response.add(storeDetailDto);
+        }
+
+        return response;
+    }
 }
