@@ -26,7 +26,7 @@ public class StoreEntity {
 
     @OneToMany(mappedBy = "storeIdx")
     @Column(name = "product_id")
-    private List<ProductEntity> products = new ArrayList<>();
+    private final List<ProductEntity> products = new ArrayList<>();
 
     public StoreEntity(String storeName) {
         this.storeName = storeName;
