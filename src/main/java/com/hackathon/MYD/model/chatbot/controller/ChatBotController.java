@@ -28,8 +28,8 @@ public class ChatBotController {
         return chatBotService.myReviewList(jwtUtil.getUserNicknameFromJwtToken(token), storeId);
     }
 
-    @GetMapping("/{storeId}/random-menu")
-    public RandomProductResponse randomMenu(@PathVariable int storeId){
-        return chatBotService.randomMenu(storeId);
+    @GetMapping("/{storeId}/menu/{message}")
+    public RandomProductResponse randomMenu(@PathVariable int storeId, @PathVariable String message){
+        return chatBotService.randomMenu(storeId, message);
     }
 }
