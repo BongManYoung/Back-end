@@ -1,12 +1,12 @@
-package com.hackathon.MYD.model.service;
+package com.hackathon.MYD.model.user.service;
 
 import com.hackathon.MYD.exception.BasicException;
-import com.hackathon.MYD.exception.ErrorCode;
-import com.hackathon.MYD.model.repository.UserRepository;
-import com.hackathon.MYD.payload.request.SingInRequest;
-import com.hackathon.MYD.payload.request.SingUpRequest;
+import com.hackathon.MYD.exception.ExceptionMessage;
+import com.hackathon.MYD.model.user.repository.UserRepository;
+import com.hackathon.MYD.model.user.payload.request.SingInRequest;
+import com.hackathon.MYD.model.user.payload.request.SingUpRequest;
 import com.hackathon.MYD.model.user.UserEntity;
-import com.hackathon.MYD.payload.response.TokenResponse;
+import com.hackathon.MYD.model.user.payload.response.TokenResponse;
 import com.hackathon.MYD.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

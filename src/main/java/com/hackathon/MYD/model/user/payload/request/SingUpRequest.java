@@ -1,4 +1,4 @@
-package com.hackathon.MYD.model.user;
+package com.hackathon.MYD.model.user.payload.request;
 
 import lombok.Getter;
 
