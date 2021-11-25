@@ -1,6 +1,5 @@
 package com.hackathon.MYD.model.review;
 
-import com.hackathon.MYD.model.empathy.EmpathyEntity;
 import com.hackathon.MYD.model.store.StoreEntity;
 import com.hackathon.MYD.model.user.UserEntity;
 import lombok.*;
@@ -21,12 +20,14 @@ public class ReviewEntity {
     @Column(name = "review_id")
     private Long reviewIdx;
 
-    /**
-     * 식별자 관계를 OneToOne 비식별자 관계로 풀어 냄.
-     */
-    @OneToOne
-    @JoinColumn(name = "empathy_id")
-    private EmpathyEntity empathyEntity;
+    @Column(name = "review_content")
+    private String reviewContent;
+
+    @Column(name = "perfect")
+    private Integer perfect;
+
+    @Column(name = "not_much")
+    private Integer notMuch;
 
     /**
      * UserEntity와 연관관계를 맺는다.
@@ -41,8 +42,4 @@ public class ReviewEntity {
     @ManyToOne(targetEntity = StoreEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "store_id")
     private StoreEntity storeEntity;
-
-
-    @Column(name = "review_content")
-    private String reviewContent;
 }
