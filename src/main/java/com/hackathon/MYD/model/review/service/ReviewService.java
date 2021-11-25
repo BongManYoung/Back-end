@@ -64,7 +64,9 @@ public class ReviewService {
      * @return List<ReviewEntity>
      */
     public List<ReviewSummary> getStoreReview(Long storeIdx){
-        return reviewRepository.findAllByStoreEntity_StoreIdx(storeIdx);
+        List<ReviewSummary> reviews = reviewRepository.findAllByStoreEntity_StoreIdx(storeIdx);
+        System.out.println("==============="+ reviews.get(0).getReviewIdx() + " " + reviews.get(0).getReiewContent());
+        return reviews;
     }
 
     /**
