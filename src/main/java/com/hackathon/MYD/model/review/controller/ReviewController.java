@@ -66,4 +66,28 @@ public class ReviewController {
         reviewService.cancelLike(reviewIdx);
         return "좋아요 취소가 정상 반영 되었습니다.";
     }
+
+    /**
+     * 해당 리뷰에 비공감 추가하기.
+     *
+     * @param reviewIdx
+     * @return String
+     */
+    @PutMapping("/dislike/{reviewIdx}")
+    public String addDislike(@PathVariable Long reviewIdx){
+        reviewService.addDislike(reviewIdx);
+        return "싫어요가 정상 반영 되었습니다.";
+    }
+
+    /**
+     * 해당 리뷰에 비공감 취소하기.
+     *
+     * @param reviewIdx
+     * @return String
+     */
+    @PutMapping("/cancel/dislike/{reviewIdx}")
+    public String cancelDislike(@PathVariable Long reviewIdx){
+        reviewService.addDislike(reviewIdx);
+        return "싫어요 취소가 정상 반영 되었습니다.";
+    }
 }
