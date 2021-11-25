@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity(name = "review")
 @Builder
-@Getter
+@Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class ReviewEntity {
@@ -42,4 +42,8 @@ public class ReviewEntity {
     @ManyToOne(targetEntity = StoreEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "store_id")
     private StoreEntity storeEntity;
+
+    public ReviewEntity updateReviewLike(){
+
+    }
 }

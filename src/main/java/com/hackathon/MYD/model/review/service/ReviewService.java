@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 /**
  * ServiceImpl
@@ -25,6 +27,14 @@ public class ReviewService {
     private final StoreRepository storeRepository;
     private final UserRepository userRepository;
 
+    /**
+     * 매장별 리뷰를 저장한다.
+     *
+     * @param storeIdx
+     * @param nickname
+     * @param reviewRequestDto
+     * @throws Exception
+     */
     @Transactional
     public void saveReview(Long storeIdx, String nickname, ReviewDto.ReviewRequestDto reviewRequestDto) throws Exception {
         // 유저가 존재하는지 확인한다.
@@ -44,5 +54,37 @@ public class ReviewService {
                 .build();
 
         reviewRepository.save(reviewEntity);
+    }
+
+    /**
+     * 매장별 리뷰를 읽어온다.
+     *
+     * @param storeIdx
+     * @return List<ReviewEntity>
+     */
+    public List<ReviewEntity> getStoreReview(Long storeIdx){
+        return reviewRepository.findAllByStoreEntity_StoreIdx(storeIdx);
+    }
+
+    /**
+     * 해당 매장에 공감을 추가한다.
+     *
+     * @param reviewIdx
+     */
+    @Transactional
+    public void addLike(Long reviewIdx){
+        ReviewEntity targetReview = reviewRepository.findByReviewIdx(reviewIdx);
+        targetReview.setPerfect(targetReview.getPerfect()+1);
+    }
+
+    /**
+     * 해당 매장에 공감을 취소한다.
+     *
+     * @param reviewIdx
+     */
+    @Transactional
+    public void cancelLike(Long reviewIdx){
+        ReviewEntity targetReview = reviewRepository.findByReviewIdx(reviewIdx);
+        targetReview.setReviewIdx(targetReview.getReviewIdx()-1);
     }
 }
