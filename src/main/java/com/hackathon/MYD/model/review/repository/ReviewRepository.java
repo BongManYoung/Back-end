@@ -14,6 +14,6 @@ public interface ReviewRepository extends JpaRepository<ReviewEntity, Long> {
 
     @Query(value =
             "select r.reviewIdx, r.reviewContent, r.perfect, r.notMuch, r.userEntity.nickname" +
-            " from review as r where r.storeEntity.storeIdx = :storeIdx")
-    List<ReviewSummary> findAllByStoreEntity_StoreIdx(@Param("storeIdx") Long storeIdx);
+            " from review as r where r.storeEntity.storeIdx = :storeIdx", nativeQuery = true)
+    List<ReviewSummary> findAllByStoreEntity_StoreIdx(@Param("storeIdx") long storeIdx);
 }
