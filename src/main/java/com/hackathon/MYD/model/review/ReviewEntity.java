@@ -1,5 +1,6 @@
 package com.hackathon.MYD.model.review;
 
+import com.hackathon.MYD.model.empathy.EmpathyEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,9 +14,14 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class ReviewEntity {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "review_id")
     private Long reviewIdx;
+
+    @OneToOne
+    @JoinColumn(name = "empathy_id")
+    private EmpathyEntity empathyEntity;
 
     /**
      * UserEntity와 연관관계를 맺는다.

@@ -14,13 +14,13 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class EmpathyEntity {
-    @EmbeddedId
-    private EmpathyId empathyIdx;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "empathy_id")
+    private Long empathyIdx;
 
-    @MapsId("reviewIdx")
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "review_id", referencedColumnName = "review_id")
-    public ReviewEntity reviewEntity;
+    @OneToOne
+    private ReviewEntity reviewEntity;
 
     @Column(name = "perfect")
     private Integer perfect;
