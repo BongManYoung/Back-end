@@ -4,7 +4,7 @@ import com.hackathon.MYD.exception.StoreNotFoundException;
 import com.hackathon.MYD.model.chatbot.payload.MenuListResponse;
 import com.hackathon.MYD.model.chatbot.payload.MyReviewResponse;
 import com.hackathon.MYD.model.chatbot.payload.MyReviewsResponse;
-import com.hackathon.MYD.model.chatbot.payload.RandomProductResponse;
+import com.hackathon.MYD.model.chatbot.payload.RandomProductAnswerResponse;
 import com.hackathon.MYD.model.product.ProductEntity;
 import com.hackathon.MYD.model.product.repository.ProductRepository;
 import com.hackathon.MYD.model.review.ReviewEntity;
@@ -48,15 +48,15 @@ public class ChatBotService {
         return MenuListResponse.builder().names(names).nextAnswer("더 필요한 게 있으신가요?").build();
     }
 
-    public RandomProductResponse randomMenu(long storeId, String message){
+    public RandomProductAnswerResponse randomMenu(long storeId, String message){
         if(checkRecommendation(message)){
-            return RandomProductResponse.builder().name("죄송합니당... 저는 아직 학습이 부족해요").build();
+            return RandomProductAnswerResponse.builder().answer("죄송합니당... 저는 아직 학습이 부족해요").build();
         }
         List<ProductEntity> products = productRepository.findByStoreIdx(storeRepository.findById(storeId).orElseThrow(StoreNotFoundException::new));
         int idx = new Random().nextInt(products.size());
         ProductEntity product = products.get(idx);
 
-        return RandomProductResponse.builder().name(product.getProductName()).build();
+        return RandomProductAnswerResponse.builder().answer(product.getProductName()).build();
     }
 
     private boolean checkRecommendation(String message){

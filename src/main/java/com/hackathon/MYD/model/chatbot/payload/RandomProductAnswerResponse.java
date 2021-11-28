@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class RandomProductResponse {
-    private final String name;
+public class RandomProductAnswerResponse {
+    private final String answer;
 }

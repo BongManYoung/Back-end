@@ -2,7 +2,7 @@ package com.hackathon.MYD.model.chatbot.controller;
 
 import com.hackathon.MYD.model.chatbot.payload.MenuListResponse;
 import com.hackathon.MYD.model.chatbot.payload.MyReviewsResponse;
-import com.hackathon.MYD.model.chatbot.payload.RandomProductResponse;
+import com.hackathon.MYD.model.chatbot.payload.RandomProductAnswerResponse;
 import com.hackathon.MYD.model.chatbot.service.ChatBotService;
 
 import com.hackathon.MYD.util.JwtUtil;
@@ -29,7 +29,7 @@ public class ChatBotController {
     }
 
     @GetMapping("/{storeId}/menu/{message}")
-    public RandomProductResponse randomMenu(@PathVariable int storeId, @PathVariable String message){
+    public RandomProductAnswerResponse randomMenu(@PathVariable int storeId, @PathVariable String message){
         return chatBotService.randomMenu(storeId, message);
     }
 }
